@@ -6,13 +6,13 @@
 
 header {
   display: flex;
-  justify-content: center; /* opcjonalnie, np. wyśrodkowanie */
+  justify-content: center; 
   align-items: center;
 }
 
 nav ul {
-  display: flex;        /* To właśnie ustawia <li> obok siebie */
-  list-style: none;     /* Usuwa kropki z listy */
+  display: flex;        
+  list-style: none;
   padding: 0;
   margin: 0;
 }
@@ -20,5 +20,74 @@ nav ul {
 li {
   margin: 10px;
   padding: 20px;
-  width: auto; /* Lepiej auto, bo 20% może rozpychać elementy */
+  width: auto;
+}
+.cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; 
+  gap: 40px; 
+  padding: 50px;
+}
+
+.card {
+  border-radius: 15px;
+  overflow: hidden;
+  width: 300px; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #a2a8d3;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.card img {
+  width: 100%;
+  height: auto;       
+  display: block;     
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.container {
+  padding: 20px;
+  text-align: center;
+}
+
+footer.footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap; 
+  padding: 40px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+footer .contact {
+  text-align: center;
+  max-width: 250px;
+  margin: 5px;
+}
+
+footer .contact h4 {
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+footer .contact p {
+  margin: 5px 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  footer.footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 }
