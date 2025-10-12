@@ -1,22 +1,23 @@
-.first-color { 
-	background: #e7eaf6; 
-}
-	
-.second-color { 
-	background: #a2a8d3; 
+.first-color {
+  background: #e7eaf6;
 }
 
-.third-color { 
-	color: #38598b; 
+.second-color {
+  background: #a2a8d3;
 }
 
-.fourth-color { 
-	color: #113f67; 
+.third-color {
+  color: #38598b;
 }
 
-:root{
-	--main-bg: #e7eaf6;
-	--alt-bg: #a2a8d3; 
-	--text: #38598b;
-	--alt-text: #113f67;
+.fourth-color {
+  color: #113f67;
+}
+
+:root {
+  --bg: #ffffff;
+  --alt-bg: #113f67;
+  --alt2-bg: #38598b;
+  --text: #000000;
+  --alt-text: #e9e9e9;
 }
