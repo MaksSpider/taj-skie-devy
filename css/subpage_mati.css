@@ -1,0 +1,213 @@
+*{
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+section{
+    border-radius: 15px;
+    margin: 10px;
+    padding: 30px;
+}
+
+.about_me{
+    display: flex;
+    gap:10px;
+    color: white;
+}
+
+.about_me img{
+    display: block;
+    flex-basis: auto;
+    height: 400px;
+}
+
+
+h2{
+    font-size: 2rem;
+}
+
+p, li{
+    font-size: 1.6rem;
+}
+
+li{
+    margin-top: 5px;
+    margin-left: 1rem;
+}
+
+.contact p{
+    margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+  .about_me{
+    flex-direction: column;
+  }
+
+  .about_me img{
+    height: 200px;
+}
+
+}
+
+.about_me {
+    display: flex;
+    gap: 20px;        
+    padding: 20px;
+}
+.description{
+    width: 50%;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #38598b;
+}
+.profile {
+    width: 50%;
+    border-radius: 15px;
+    background-color: #38598b;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;     
+    justify-content: center; 
+    text-align: center;
+}
+
+.profile h2 {
+    margin-bottom: 10px;
+    color: white;
+}
+
+.profile img {
+    border-radius: 15px;
+    max-width: 80%;      
+    max-height: 350px;   
+    height: auto;        
+    display: block;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .about_me {
+        flex-direction: column;  
+        align-items: center;     
+    }
+
+    .description,
+    .profile {
+        width: 100%;            
+    }
+
+    .profile img {
+        max-width: 60%;          
+        max-height: 180px;   
+    }
+}
+
+.interests {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.interests h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.interests ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.interests li {
+    background: linear-gradient(135deg, #38598b, #2c3e73);
+    color: white;
+    border-radius: 15px;
+    padding: 20px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.interests li i {
+    font-size: 1.4rem;
+    color: #a2bce0;
+}
+
+.interests li:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+.sticker {
+    position: absolute;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0.9;
+    user-select: none;
+}
+
+.spiderman {
+    width: 160px;
+    top: -20px;
+    right: -20px;
+    transform: rotate(10deg);
+}
+
+.interests {
+    position: relative;
+}
+.quote-section {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #2c3e73, #38598b);
+    color: #f5f5f5;
+    font-family: 'Georgia', serif;
+    border-radius: 15px;
+    position: relative;
+}
+
+.quote-section blockquote {
+    font-size: 1.4rem;
+    font-style: italic;
+    line-height: 1.6;
+    position: relative;
+}
+
+.quote-section blockquote::before,
+.quote-section blockquote::after {
+    content: "“";
+    font-size: 3rem;
+    position: absolute;
+    color: #a2bce0;
+    opacity: 0.3;
+}
+
+.quote-section blockquote::before {
+    left: -10px;
+    top: -20px;
+}
+
+.quote-section blockquote::after {
+    content: "”";
+    right: -10px;
+    bottom: -30px;
+}
+
+.quote-section span {
+    display: block;
+    margin-top: 15px;
+    font-size: 1rem;
+    color: #d0dff5;
+}

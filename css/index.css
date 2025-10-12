@@ -44,6 +44,10 @@ nav a:hover{
   padding: 50px;
 }
 
+.cards a{
+  text-decoration: none;
+}
+
 .card {
   border-radius: 15px;
   overflow: hidden;
