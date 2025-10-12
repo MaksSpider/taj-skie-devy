@@ -1,0 +1,52 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+section{
+    margin: 10px;
+    padding: 30px;
+}
+
+.about_me{
+    display: flex;
+    gap:10px;
+}
+
+.about_me img{
+    display: block;
+    flex-basis: auto;
+    height: 400px;
+}
+
+.about_me div{
+    align-self: center;
+}
+
+h2{
+    font-size: 2rem;
+}
+
+p, li{
+    font-size: 1.2rem;
+}
+
+li{
+    margin-top: 5px;
+    margin-left: 1rem;
+}
+
+.contact p{
+    margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+  .about_me{
+    flex-direction: column;
+  }
+
+  .about_me img{
+    height: 200px;
+}
+
+}
