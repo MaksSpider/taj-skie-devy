@@ -4,6 +4,21 @@
   --main-text: white;
 }
 
-nav {
-  color: var(--main-text);
+header {
+  display: flex;
+  justify-content: center; /* opcjonalnie, np. wyśrodkowanie */
+  align-items: center;
+}
+
+nav ul {
+  display: flex;        /* To właśnie ustawia <li> obok siebie */
+  list-style: none;     /* Usuwa kropki z listy */
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin: 10px;
+  padding: 20px;
+  width: auto; /* Lepiej auto, bo 20% może rozpychać elementy */
 }
