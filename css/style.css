@@ -22,6 +22,8 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: sticky;
+  top: 0;
   background-color: var(--alt-bg);
 }
 
@@ -43,7 +45,7 @@ header h1:hover {
 
 nav {
   display: flex;
-  padding: 15px 0;
+  padding: 5px 0;
 }
 
 nav a {
@@ -91,7 +93,7 @@ main {
 footer {
   background-color: var(--alt-bg);
   text-align: center;
-  padding: 10px;
+  padding: 8px;
   letter-spacing: 1px;
   border-top: 1px solid var(--text);
   width: 100%;
@@ -99,7 +101,7 @@ footer {
 }
 
 footer p {
-  margin: 10px;
+  margin: 5px;
   font-size: 16px;
   color: var(--alt-text);
 }
@@ -114,4 +116,80 @@ footer::before {
   height: 3px;
   background-color: var(--text);
   border-radius: 2px;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+}
+
+/* Responsywność */
+@media (max-width: 1200px) {
+  header {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  header h1 {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a {
+    width: 200px;
+    margin: 5px 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  nav a {
+    width: 90%;
+    max-width: 300px;
+    margin: 5px 0;
+    padding: 12px 15px;
+  }
+
+  nav a span {
+    font-size: 16px;
+  }
+
+  nav a i {
+    font-size: 20px;
+  }
+
+  footer p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.2rem;
+  }
+
+  nav a {
+    padding: 10px 12px;
+  }
+
+  nav a span {
+    font-size: 14px;
+  }
+
+  footer p {
+    font-size: 12px;
+  }
 }
