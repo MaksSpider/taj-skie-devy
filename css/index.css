@@ -1,3 +1,10 @@
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .cards {
   display: flex;
   justify-content: center;
@@ -17,6 +24,10 @@
   overflow: hidden;
   width: 400px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  -webkit-transition: transform 0.3s ease, box-shadow 0.3s ease;
+  -moz-transition: transform 0.3s ease, box-shadow 0.3s ease;
+  -ms-transition: transform 0.3s ease, box-shadow 0.3s ease;
+  -o-transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 2px solid var(--alt-bg);
   background-color: var(--alt2-bg);
 }
@@ -45,9 +56,91 @@
   margin-top: 0;
 }
 
-.container {
+.card-container {
   padding: 20px;
   text-align: center;
+}
+
+.contact-form {
+  width: 95%;
+  max-width: 1000px;
+  margin: 20px;
+  padding: 40px;
+  background: var(--bg);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  text-align: center;
+}
+
+h1 {
+  color: var(--text-primary);
+  font-size: 2.5em;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.form-group i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-primary);
+  font-size: 1.2em;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 15px 15px 15px 45px;
+  color: var(--text-main);
+  border: 2px solid var(--border-color);
+  background-color: var(--background-tertiary);
+  border-radius: 10px;
+  font-size: 1em;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-group input:valid {
+  background: var(--input-valid-background);
+}
+
+.form-group input:focus {
+  border-color: var(--text-main);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--shadow-color);
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.auth-button {
+  width: 80%;
+  padding: 15px;
+  background: #001f3f;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.auth-button:hover {
+  background: #003366;
+  transform: translateY(-2px);
 }
 
 /* Responsywność */
@@ -90,7 +183,7 @@
     font-size: 0.9rem;
   }
 
-  .container {
+  .card-container {
     padding: 15px;
   }
 }
