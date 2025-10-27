@@ -1,1 +1,127 @@
 
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6; /* Jasne tło strony */
+}
+
+.quiz-container {
+    display: grid;
+    /* Definicja siatki: 1 kolumna na wyświetlacz, 2 kolumny na przyciski (A/B i C/D) */
+    grid-template-columns: repeat(2, 1fr);
+    /* Definicja wierszy: auto dla wyświetlacza, potem 2 wiersze dla przycisków */
+    grid-template-rows: auto repeat(2, 1fr);
+    
+    gap: 15px; /* Odstępy między elementami siatki */
+    
+    width: 90%;
+    max-width: 600px;
+    padding: 30px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Wyświetlacz (pole na pytanie) */
+#display {
+    /* Rozciągnij na całą szerokość siatki (na obie kolumny) */
+    grid-column: 1 / -1; 
+    
+    padding: 20px 15px;
+    margin-bottom: 15px;
+    
+    min-height: 80px; /* Minimalna wysokość, aby zmieścić pytanie */
+    font-size: 1.2em;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: left;
+    
+    border: 2px solid #a8c0ff; /* Delikatna ramka */
+    border-radius: 8px;
+    background-color: #eef3ff; /* Subtelne tło */
+    color: #333;
+    
+    box-sizing: border-box;
+    /* Styl dla nieaktywnego pola (choć w quizie będzie używane do wyświetlania) */
+    pointer-events: none;
+    resize: none; 
+}
+
+/* Przyciski odpowiedzi */
+button {
+    padding: 15px 10px;
+    font-size: 1em;
+    font-weight: 700;
+    text-align: left;
+    
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    
+    background-color: #7f8c8d; /* Bazowy szary kolor */
+    color: #fff;
+    
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+    background-color: #6c7a7b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Specjalne kolory dla poszczególnych przycisków (opcjonalnie) */
+.answerA {
+    background-color: #3498db; /* Niebieski */
+}
+.answerA:hover {
+    background-color: #2980b9;
+}
+
+.answerB {
+    background-color: #2ecc71; /* Zielony */
+}
+.answerB:hover {
+    background-color: #27ae60;
+}
+
+.answerC {
+    background-color: #f1c40f; /* Żółty */
+    color: #333; /* Ciemny tekst dla jasnego tła */
+}
+.answerC:hover {
+    background-color: #f39c12;
+    color: #333;
+}
+
+.answerD {
+    background-color: #e74c3c; /* Czerwony */
+}
+.answerD:hover {
+    background-color: #c0392b;
+}
+
+/* Responsywność dla małych ekranów (np. telefony trzymane pionowo) */
+@media (max-width: 480px) {
+    .quiz-container {
+        /* Na małych ekranach przyciski układają się w jednej kolumnie */
+        grid-template-columns: 1fr; 
+        grid-template-rows: auto repeat(4, auto);
+        padding: 20px;
+        gap: 10px;
+    }
+    
+    /* Wszystkie elementy muszą zająć teraz całą nową kolumnę */
+    #display,
+    button {
+        grid-column: 1 / -1; 
+    }
+}
