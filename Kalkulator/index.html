@@ -3,9 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Kalkulator Grid</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div id="calculator">
+        <input type="text" id="display" disabled value="0">
+        <button class="grid-item num">7</button>
+        <button class="grid-item num">8</button>
+        <button class="grid-item num">9</button>
+        <button class="grid-item operator">+</button>
+
+        <button class="grid-item num">4</button>
+        <button class="grid-item num">5</button>
+        <button class="grid-item num">6</button>
+        <button class="grid-item operator">-</button>
+
+        <button class="grid-item num">1</button>
+        <button class="grid-item num">2</button>
+        <button class="grid-item num">3</button>
+        <button class="grid-item operator">*</button>
+
+        <button class="grid-item num span-2">0</button> <button class="grid-item operator">/</button>
+        <button class="grid-item equals">=</button>
+        <button class="grid-item clear">C</button> </div>
+    <script src="script.js"></script>
 </body>
 </html>
