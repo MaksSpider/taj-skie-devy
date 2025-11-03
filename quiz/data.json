@@ -1,1 +1,32 @@
-
+{
+    "questions":[
+        {
+            "question": "2 + 2",
+            "answers":[
+                "2","3","22","4"
+            ],
+            "correct_answer": "D"
+        },
+        {
+            "question": "2 + 3",
+            "answers":[
+                "2","5","22","4"
+            ],
+            "correct_answer": "B"
+        },
+        {
+            "question": "5 + 5",
+            "answers":[
+                "10","3","22","4"
+            ],
+            "correct_answer": "A"
+        },
+        {
+            "question": "10 - 5",
+            "answers":[
+                "2","3","5","4"
+            ],
+            "correct_answer": "C"
+        }
+    ]
+}
