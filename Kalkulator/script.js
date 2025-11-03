@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getNumber(){
-        number += this.textContent;
+        if(number == '0' ) number = this.textContent;
+        else number += this.textContent;
         updateDisplay();
     }
 
