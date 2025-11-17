@@ -1,5 +1,6 @@
-import data from './data.json' with { type: "json" };
 document.addEventListener('DOMContentLoaded', () => {
+    let correct_answer = null;
+    get_data();
     const buttons = document.querySelectorAll('button');
     const printer = document.querySelector('.display');
     const next = document.querySelector('.next');
@@ -10,6 +11,26 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentQuestion = 0;
     let lifes = 3;
     let chosenAnswer = '';
+
+    async function get_data(){
+        fetch('./data.json').then(
+        response => {return response.json()}).then(
+            data => {
+                for(let i = 0; i < data.length(); i++){
+                    setData(data.questions[0]);
+                    //answer = await set_aswer
+                }
+            }
+    );
+    }
+
+    async function set_aswer(btn){
+        return new Promise(resolve =>  btn.onclick = set_btn_value => resolve());
+    }
+
+    function set_btn_value() {
+        return this.textContent[0];
+    }
 
     function answer(){
         chosenAnswer = this.textContent[0];
@@ -27,17 +48,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentQuestion = 0;
                 lifes = 3;
                 clear();
-                setText();
+                setData();
             }
         }
         console.log(chosenAnswer);
     }
 
-    function setText(){
-        printer.value = data.questions[currentQuestion].question;
+    function setData(data){
+        printer.value = data.question;
         for(let i = 0; i< buttons.length; i++){
-            buttons[i].textContent += data.questions[currentQuestion].answers[i];
+            buttons[i].textContent += data.answers[i];
         }
+        correct_answer = data.correct_answer;
     }
     function changeQuestion(){
         currentQuestion++;
@@ -47,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             lifes = 3;
         }
         clear();
-        setText();
+        setData();
         
     }
     function clear(){
@@ -59,6 +81,4 @@ document.addEventListener('DOMContentLoaded', () => {
         next.style.display = "none";
         chosenAnswer = '';
     }
-
-    setText();
 });
