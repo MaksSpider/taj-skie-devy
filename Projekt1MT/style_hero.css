@@ -1,0 +1,329 @@
+/* --- OGÓLNY UKŁAD NA MAIN (Podstrona) --- */
+
+main {
+    /* KLUCZOWA ZMIANA: Z Flexbox na Grid */
+    display: grid;
+    
+    /* GŁÓWNA ZASADA RESPONSYWNOŚCI: 
+       Tworzy kolumny o minimalnej szerokości 450px, a resztę dzieli równo.
+       To zapewni dwie kolumny na szerokim ekranie i jedną na mobile. */
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    
+    /* Zastępuje gap: 50px */
+    gap: 100px; 
+    column-gap: 500px;
+    
+    /* Zachowujemy padding */
+    padding: 40px 20px;
+    
+    /* Maksymalne ograniczenie szerokości kontenera */
+    max-width: 1400px; 
+    margin: 0 auto; /* Centrowanie kontenera Grid */
+}
+
+.page-title-panel {
+    max-width: 800px;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: var(--spidey-white);
+    border: 4px solid var(--spidey-yellow);
+}
+
+/* --- KARTA POSTACI (GŁÓWNY KONTENER) --- */
+
+.hero-card {
+    /* Ustawienie elementu nadrzędnego dla pozycjonowania absolutnego */
+    position: relative;
+    width: 100%;
+    min-height: 700px;
+    overflow:visible; 
+    cursor: pointer;
+    
+    border: 8px solid var(--spidey-black);
+    border-radius: 15px;
+    box-shadow: 10px 10px 0 var(--spidey-red);
+    transition: box-shadow 0.3s ease;
+    z-index: 10; 
+    border-radius: 15px;
+}
+
+#info h2, #info p {
+    color: var(--spidey-white); /* Ustawiamy jawny, widoczny kolor */
+    z-index: 55; /* Upewniamy się, że są na wierzchu tła */
+    position: relative; /* Wymagane dla z-index */
+}
+#info {
+    /* Nadpisujemy style hero-card, które tu nie pasują */
+    display: block; /* Upewniamy się, że nie koliduje z Gridem */
+    width: 90%;
+    max-width: 800px;
+    min-height: 150px;
+    padding: 20px;
+    margin-bottom: 50px; /* Separacja od reszty kart */
+    text-align: center;
+    position: relative;
+    z-index: 2; /* Niższy, bezpieczny z-index */
+    
+    /* Resetujemy style figure i panel */
+    overflow: visible !important; 
+    border: none !important;
+    box-shadow: none !important;
+}
+#info .card-background {
+    z-index: 1;
+}
+
+#info h2 {
+    color: var(--spidey-yellow) !important; /* Nadpisujemy tytuł, by był żółty */
+    /* Zmień też w swoim kodzie: */
+    /* #info h2 { color: var(--spidey-yellow) !important; z-index: 50; } */ 
+    /* Dodałem to do kodu w celu ujednolicenia. */
+}
+
+/* Stan Hover - Wysunięcie Cienia */
+.hero-card:hover {
+    box-shadow: 15px 15px 0 var(--spidey-yellow);
+}
+#info:hover{
+    box-shadow: 15px 15px 0 var(--spidey-yellow);
+}
+
+/* --- TŁO KARTY (Świat Postaci) --- */
+
+.card-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-size: cover !important;
+    background-position: center !important;
+    opacity: 1; 
+    z-index: 10;
+    border-radius: 15px;
+}
+
+
+/* Przykład tła dla kart (Dodaj jako uzupełnienie sekcji .parX z Index.html) */
+.par1-bg {
+    background-image: url('img/bg_616.jpg'); /* Tło Nowego Jorku 616 */
+}
+.par2-bg {
+    background-image: url('img/brooklyn1610.jpg'); /* Tło Brooklynu 1610 */
+}
+.par3-bg {
+    background-image: url('img/bg_65.jpg'); /* Tło Brooklynu 1610 */
+}
+.par4-bg {
+    background-image: url('img/bg928.jpg'); /* Tło Brooklynu 1610 */
+}
+.par5-bg {
+    background-image: url('img/bg_138.jpg'); /* Tło Brooklynu 1610 */
+}
+.par6-bg {
+    background-image: url('img/bg50101.jpg'); /* Tło Brooklynu 1610 */
+}
+.par7-bg {
+    background-image: url('img/bg_scarlet.jpg'); /* Tło Brooklynu 1610 */
+}
+.par8-bg {
+    background-image: url('img/bg_90214.jpg'); /* Tło Brooklynu 1610 */
+}
+.par9-bg {
+    background-image: url('img/bg_ham.jpg'); /* Tło Brooklynu 1610 */
+}
+.par10-bg {
+    background-image: url('img/bg_10.jpg'); /* Tło Brooklynu 1610 */
+}
+/* --- RYSUNEK POSTACI (FIGURE) --- */
+
+.main-hero-figure {
+    position: absolute;
+    top: 0%; /* Umieszczamy na dole karty */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Wymiary dostosowane do proporcji postaci */
+    width: 400px; 
+    height: 600px; 
+    
+    background-size: contain !important;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    
+    z-index: 15; 
+    transition: transform 0.3s ease;
+}
+
+/* ANIMACJA: Postać wyskakuje z karty */
+.hero-card:hover .main-hero-figure {
+    transform: translateX(-50%) translateY(-20px) scale(1.25);
+}
+
+.hero-name {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--spidey-yellow);
+    font-size: 2em;
+    text-shadow: 2px 2px 0 var(--spidey-black);
+}
+
+/* --- WYSUWANE PANELE INFORMACYJNE (INFO-PANEL) --- */
+
+.info-panel {
+    position: absolute;
+    top: 0;
+    /* Zmniejszamy szerokość, aby nie wypełniały całej karty i nie nachodziły na postać */
+    width: 200px; 
+    height: 60%;
+    padding: 20px;
+    background-color: rgba(26, 26, 26, 0.95); /* Półprzezroczyste czarne tło */
+    color: var(--spidey-white);
+    
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth animation */
+    /* Z-index musi być niższy niż karta (10), ale wyższy niż tło (1) */
+    z-index: 5; 
+    
+    box-shadow: 0 0 0 4px var(--spidey-red);
+    color: rgba(255, 255, 255, 0);
+}
+
+.info-panel h3 {
+    color: rgba(255, 255, 255, 0);
+    border-bottom: 2px solid var(--spidey-yellow);
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.info-panel ul {
+    list-style-type: '⚡'; /* Komiksowy Bullet Point */
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+/* Panel LEWY - Początkowe ukrycie (WYPCHNĄĆ W LEWO) i stan HOVER */
+.info-left {
+    left: -10%;
+    top: 5%;
+    /* KLUCZ: Wysuń poza kartę. Musi być szerszy niż -100%, aby linia graniczna była niewidoczna */
+    transform: translateX(0); 
+    z-index: 0;
+}
+
+.hero-card:hover .info-left {
+    /* KLUCZ: Wysuń do wewnątrz tylko tyle, ile wynosi szerokość panelu */
+    transform: translateX(-110%); 
+    color: rgba(255, 255, 255, 1);
+}
+.hero-card:hover .info-panel h3{
+    color: var(--spidey-yellow);
+}
+
+/* Panel PRAWY - Początkowe ukrycie (WYPCHNĄĆ W PRAWO) i stan HOVER */
+.info-right {
+    right: -10%;
+    top: 30%;
+    transform: translateX(0%); 
+    z-index: 0;
+}
+
+.hero-card:hover .info-right {
+    /* KLUCZ: Wysuń do wewnątrz tylko tyle, ile wynosi szerokość panelu */
+    transform: translateX(110%); 
+    color: rgba(255, 255, 255, 1);
+}
+
+footer{
+    margin-top: 100px;
+}
+
+/* --- RESPONSYWNOŚĆ (Mobile) --- */
+
+@media (max-width: 800px) {
+    /* --- KOREKTA GŁÓWNEGO UKŁADU --- */
+    main {
+        grid-template-columns: 1fr; /* Wymuszamy jedną kolumnę */
+        padding: 20px 10px;
+        gap: 30px;
+    }
+    
+    /* --- KOREKTA KARTY (MUSI BYĆ POZYCJONOWANA STATYCZNIE) --- */
+    .hero-card {
+        min-height: auto; /* Wysokość będzie dyktowana przez zawartość */
+        max-width: 95%; 
+        box-shadow: 6px 6px 0 var(--spidey-red);
+        /* Zmieniamy kartę na statyczną, aby jej dzieci się normalnie układały */
+        position: static; 
+        overflow: visible; /* Aby elementy figure mogły wystawać */
+    }
+
+    /* --- POSTAĆ (FIGURE) - Zmiana pozycjonowania --- */
+    .main-hero-figure {
+        /* Postać staje się elementem blokowym, umieszczonym nad panelami */
+        position: relative; /* Zmieniamy na relative, by mogła się normalnie układać */
+        width: 100%;
+        height: 300px; /* Stała wysokość dla figure */
+        transform: none; 
+        left: auto;
+        top: auto;
+        
+        /* Wyłączamy animację powiększania/przesuwania na hover (touchscreen) */
+        transition: none; 
+    }
+    .hero-card:hover .main-hero-figure {
+        transform: none; 
+    }
+
+    /* --- WŁAŚCIWE UŁOŻENIE: PANELE POD SPODEM --- */
+    .info-panel {
+        /* KLUCZ: Wracają do NORMALNEGO obiegu dokumentu */
+        position: static; 
+        width: 85%;
+        height: auto; /* Wysokość dyktowana przez treść */
+        padding: 20px;
+        margin-top: 20px; /* Odstęp od figure */
+        
+        /* Resetujemy wszelkie transformacje i z-index */
+        transform: none !important;
+        left: auto;
+        right: auto;
+        top: auto;
+        z-index: auto;
+        
+        /* Zapewniamy widoczność, tekst jest już widoczny dzięki hover */
+        opacity: 1; 
+        color: var(--spidey-white); /* Tekst jest widoczny */
+    }
+
+    /* --- USUNIĘCIE ANIMACJI HOVER NA MOBILE --- */
+    .hero-card:hover .info-left,
+    .hero-card:hover .info-right {
+        transform: none !important; 
+        color: var(--spidey-white);
+    }
+    
+    .info-panel h3 {
+        color: var(--spidey-yellow) !important;
+    }
+    
+    /* Zmiana dla sekcji tytułowej (na mobile) */
+    #info {
+        width: 100%;
+        padding: 10px 0;
+        margin-bottom: 20px;
+        /* Nadpisujemy, by była widoczna */
+        background: none !important; 
+    }
+    
+    #info .card-background {
+        display: none !important; /* Definitywnie usuwamy obraz tła na mobile */
+    }
+    #info h2, #info p {
+    color: var(--spidey-white); /* Ustawiamy jawny, widoczny kolor */
+    z-index: 55; /* Upewniamy się, że są na wierzchu tła */
+    position: relative; /* Wymagane dla z-index */
+}
+}

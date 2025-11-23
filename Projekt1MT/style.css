@@ -1,0 +1,443 @@
+/* --- ZMIENNE KOLORÓW --- */
+:root {
+    --spidey-red: #E30026;
+    --spidey-blue: #005691;
+    --spidey-yellow: #FFD700;
+    --spidey-black: #1A1A1A;
+    --spidey-white: #FFFFFF;
+    --panel-overlap: 80px; /* Wysokość nachodzenia sekcji */
+}
+
+/* --- 1. GŁÓWNY UKŁAD (BODY GRID) I RESETOWANIE --- */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--spidey-black);
+    color: var(--spidey-white);
+    
+    /* GŁÓWNY GRID NA BODY (PIONOWY UKŁAD) */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+        "header"
+        "content"
+        "footer";
+    min-height: 100vh;
+    letter-spacing: 3px;
+}
+
+.bangers-regular {
+    font-family: "Bangers", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+h1, h2, h3, p, ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* --- 2. SEKCJA HEADER (PRZEWIJALNY) --- */
+header {
+    grid-area: header;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    background-color: var(--spidey-red);
+    padding: 10px 20px;
+    z-index: 100; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    border-bottom: 5px solid var(--spidey-black);
+}
+header a {
+    text-decoration: none;
+    text-align: center;
+}
+
+header a h1 {
+    color: var(--spidey-yellow);
+    font-size: 2.2em;
+    padding-right: 20px;
+    white-space: nowrap;
+    text-shadow: 2px 2px 0 var(--spidey-black);
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+}
+
+header ul {
+    list-style-type: none;
+    margin: 0; 
+    padding: 0;
+    display: flex; 
+    gap: 20px;
+}
+
+header ul li a {
+    text-decoration: none;
+    color: var(--spidey-white);
+    font-size: 1.2em;
+    padding: 10px 15px;
+    display: block;
+    background-color: var(--spidey-blue);
+    border-radius: 5px;
+    border: 2px solid var(--spidey-black);
+    transition: background-color 0.2s;
+}
+
+header ul li a:hover {
+    background-color: #0087c5;
+    color: var(--spidey-yellow);
+}
+
+/* --- 3. SEKCJA MAIN (KONTENER DLA KADRÓW) --- */
+main {
+    grid-area: content;
+    padding-top: 0;
+    margin: 0; 
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    width: 100%;
+}
+
+/* --- 4. SEKCJE 'KADRY KOMIKSOWE' (.story-panel) --- */
+.story-panel {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: "image text"; 
+    
+    min-height: 400px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: none; 
+}
+
+/* --- OBSZARY WEWNĘTRZNE (IMAGE / TEXT) --- */
+.story-panel .image-area {
+    grid-area: image;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border: 4px solid var(--spidey-black); 
+    background-color: var(--spidey-white);
+    z-index: 1;
+}
+
+.story-panel .text-area {
+    grid-area: text;
+    padding: 30px;
+    background-color: var(--spidey-blue);
+    color: var(--spidey-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative; 
+    overflow: visible;
+    border: 4px solid var(--spidey-black);
+    z-index: 20; 
+    border-left: none; 
+}
+
+.story-panel .text-area p{
+    z-index: 20;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.story-panel.reverse .text-area::after {
+    content: ''; 
+    
+    position: absolute;
+    top: -.01px;
+    bottom: -.01px;
+    
+    right: -35px; 
+    left: unset;
+    
+    width: 70px; 
+    
+    background-color: var(--spidey-blue); 
+    box-shadow: 6px 0 0 0 var(--spidey-black);
+
+    transform: skewX(10deg); 
+    z-index: 30;
+
+    border: none !important;
+}   
+
+#panel-contact .text-area::after {
+    content: ''; 
+    
+    position: absolute;
+    top: -.01px;
+    bottom: -.01px;
+    
+    right: -47px; 
+    left: unset;
+    
+    width: 90px; 
+    
+    background-color: var(--spidey-blue); 
+    box-shadow: 6px 0 0 0 var(--spidey-black);
+
+    transform: skewX(10deg); 
+    z-index: 30;
+
+    border: none !important;
+}
+
+/* --- KOREKTA DLA ZWYKŁEJ SEKCJI (TEXT po prawej) --- */
+
+.story-panel:not(.reverse) .text-area::before {
+    content: ''; 
+    position: absolute;
+    top: -.01px; 
+    bottom: -.01px; 
+    
+    left: -35px; 
+    width: 70px;
+    
+    background-color: var(--spidey-blue); 
+    
+    box-shadow: -6px 0 0 0 var(--spidey-black);
+
+    transform: skewX(-10deg); 
+    z-index: 10
+}
+
+.story-panel h2 {
+    font-size: 2.2em;
+    color: var(--spidey-yellow);
+    text-shadow: 2px 2px 0 var(--spidey-black);
+    line-height: 1.1;
+    margin-bottom: 10px;
+}
+
+.story-panel:not(.reverse) .text-area h2{
+    z-index: 20;
+}
+
+.story-panel.reverse {
+    grid-template-columns: 1fr 2fr; /* Tekst 1/3, Grafika 2/3 */
+    grid-template-areas: "text image";
+}
+
+.story-panel.reverse .text-area{
+    z-index: 10;
+    border: 4px solid var(--spidey-black); 
+    border-right: none;
+}
+
+/* --- STYLOWANIE FORMULARZA FAN ZONE --- */
+
+.form-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    z-index: 80 !important;
+}
+
+.fan-form {
+    width: 100%;
+    max-width: 400px;
+    max-height: 400px;
+    padding: 20px;
+    
+    background-color: var(--spidey-white);
+    color: var(--spidey-black);
+    border: 5px solid var(--spidey-black);
+    border-radius: 10px;
+    box-shadow: 4px 4px 0 var(--spidey-red); 
+
+    position: relative; 
+    z-index: 85 !important;
+}
+
+.form-title {
+    font-size: 1.8em;
+    color: var(--spidey-red);
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 0 var(--spidey-black);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.fan-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.fan-form input[type="text"],
+.fan-form input[type="email"],
+.fan-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--spidey-black);
+    border-radius: 5px;
+    box-sizing: border-box; 
+    background-color: #f7f7f7;
+    color: var(--spidey-black);
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+
+    position: relative; 
+    z-index: 90 !important; 
+}
+
+.fan-form textarea {
+    resize: vertical; 
+}
+
+.submit-button {
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+    align-self: auto; 
+}
+
+/* --- Przycisk CTA (Wewnątrz panelu) --- */
+.cta-button {
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 15px;
+    font-size: 1.1em;
+    font-weight: 700;
+    background-color: var(--spidey-yellow);
+    color: var(--spidey-black);
+    border: 3px solid var(--spidey-black);
+    border-radius: 5px;
+    transition: background-color 0.2s;
+    align-self: flex-start;
+}
+
+.cta-button:hover {
+    background-color: #ffe53c;
+}
+.submit-button{
+    font-family: "Bangers", system-ui;
+    font-size: 1.1em;
+    font-weight: 700;
+}
+
+.par1{
+    z-index: 9;
+    background: url('img/par1.jpg') center/cover no-repeat;
+}
+.par2{
+    z-index: 1;
+    background: url('img/par2.jpg') center/cover no-repeat;
+    background-position: center 10% !important;
+}
+.par3{
+    z-index: 9;
+    background: url('img/par3-3.jpg') center/cover no-repeat;
+    background-position: center 20% !important;
+}
+.par4{
+    z-index: 9;
+    background-color: var(--spidey-red)!important;
+}
+
+/* --- SEKCJA FOOTER --- */
+footer {
+    grid-area: footer;
+    background-color: var(--spidey-red);
+    color: var(--spidey-white);
+    border-top: 5px solid var(--spidey-black);
+    padding: 15px;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+
+@media (max-width: 800px) {
+    /* HEADER: Układ pionowy */
+    header {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        padding: 10px;
+        text-align: center;
+    }
+    
+    header ul {
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 10px;
+        margin: 5px 0 0 0;
+    }
+
+    .story-panel {
+        /* Przejście z 2:1 na STOS (Grafika/Tekst) */
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "image"
+            "text";
+        margin-top: 0 !important;
+        border-bottom: 5px solid var(--spidey-black); /* Przywracamy wizualny podział */
+    }
+    .story-panel.reverse {
+        /* Przejście z 2:1 na STOS (Grafika/Tekst) */
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "image"
+            "text";
+        margin-top: 0 !important;
+        border-bottom: 5px solid var(--spidey-black); /* Przywracamy wizualny podział */
+    }
+    
+    .story-panel .text-area::before,
+    .story-panel.reverse .text-area::before {
+        content: none; 
+    }
+    
+    .story-panel:not(:first-child) {
+        margin-top: 20px !important;
+        z-index: auto;
+    }
+    
+    .story-panel .image-area {
+        min-height: 250px;
+        border-right: 4px solid var(--spidey-black);
+        border-bottom: 4px solid var(--spidey-black);
+    }
+}
+
+/*------------- Animacje przycisków----------------------*/
+header ul li a {
+    transition: all 0.2s ease-out; 
+}
+
+header ul li a:hover {
+    background-color: #0087c5; 
+    color: var(--spidey-yellow);
+    
+    transform: translateY(-3px) scale(1.02); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); 
+}
+
+.cta-button {
+    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out; 
+}
+
+.cta-button:hover {
+    background-color: #ffe53c;
+    color: var(--spidey-black);
+
+    transform: translate(-3px, -3px) scale(1.01); 
+    box-shadow: 4px 4px 0 var(--spidey-red); 
+}
+.submit-button:hover {
+    background-color: #ffe53c; 
+    transform: translate(-3px, -3px);
+}
