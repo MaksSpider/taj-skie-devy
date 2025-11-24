@@ -1,84 +1,107 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let correct_answer = null;
-    get_data();
-    const buttons = document.querySelectorAll('button');
-    const printer = document.querySelector('.display');
-    const next = document.querySelector('.next');
-
-    buttons.forEach(element => element.addEventListener('click', answer));
-    next.addEventListener('click', changeQuestion);
-
+    let quizData = null; 
     let currentQuestion = 0;
     let lifes = 3;
-    let chosenAnswer = '';
+    
+    const buttons = document.querySelectorAll('button');
+    const printer = document.querySelector('.display'); // Upewnij się, że używasz klasy 'display' dla inputa
+    const next = document.querySelector('.next');
 
-    async function get_data(){
-        fetch('./data.json').then(
-        response => {return response.json()}).then(
-            data => {
-                for(let i = 0; i < data.length(); i++){
-                    setData(data.questions[0]);
-                    //answer = await set_aswer
-                }
-            }
-    );
-    }
+    initQuiz(); 
 
-    async function set_aswer(btn){
-        return new Promise(resolve =>  btn.onclick = set_btn_value => resolve());
-    }
-
-    function set_btn_value() {
-        return this.textContent[0];
-    }
-
-    function answer(){
-        chosenAnswer = this.textContent[0];
-        if(chosenAnswer == data.questions[currentQuestion].correct_answer){
-            console.log("poprawna");
-            console.log(this);
-            this.style.backgroundColor = "#2ecc71";
-            next.style.display = "block";
-        }else{
-            this.style.backgroundColor = "#e74c3c";
-            lifes --;
-            console.log(lifes);
-            if(lifes == 0){
-                alert("Game Over");
-                currentQuestion = 0;
-                lifes = 3;
-                clear();
-                setData();
-            }
-        }
-        console.log(chosenAnswer);
-    }
-
-    function setData(data){
-        printer.value = data.question;
-        for(let i = 0; i< buttons.length; i++){
-            buttons[i].textContent += data.answers[i];
-        }
-        correct_answer = data.correct_answer;
-    }
-    function changeQuestion(){
-        currentQuestion++;
-        if(currentQuestion >= data.questions.length){
-            alert("You have completed the quiz!");
-            currentQuestion = 0;
-            lifes = 3;
-        }
-        clear();
-        setData();
-        
-    }
-    function clear(){
-        let answers = ['A. ', 'B. ', 'C. ', 'D. '];
-        for(let i = 0; i< buttons.length; i++){
-            buttons[i].textContent = answers[i];
-            buttons[i].style.backgroundColor = "#2980b9";
-        }
+    buttons.forEach(element => element.addEventListener('click', answer));
+    if (next) { 
+        next.addEventListener('click', changeQuestion);
         next.style.display = "none";
-        chosenAnswer = '';
+    }
+
+    async function initQuiz() {
+        try {
+            quizData = await get_data(); 
+            console.log("Dane quizu załadowane pomyślnie.");
+            displayQuestion(); 
+            
+        } catch (error) {
+            console.error("Błąd podczas ładowania danych quizu:", error);
+            printer.value = "Błąd ładowania danych!"; 
+        }
+    }
+
+    async function get_data() {
+        const response = await fetch('./data.json');
+        
+        if (!response.ok) {
+            throw new Error(`Błąd sieci: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        return data.questions;
+    }
+
+    function displayQuestion() {
+        if (!quizData || quizData.length === 0) return;
+
+        const currentQ = quizData[currentQuestion];
+
+        printer.value = currentQ.question; 
+        
+        const answersPrefix = ['A. ', 'B. ', 'C. ', 'D. '];
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].textContent = answersPrefix[i] + currentQ.answers[i]; 
+            buttons[i].disabled = false; 
+        }
+        
+        if (next) next.style.display = "none";
+    }
+
+    function answer() {
+        if (!quizData) return;
+
+        const currentQ = quizData[currentQuestion];
+        const chosenAnswerLetter = this.textContent.trim()[0]; 
+
+        if (chosenAnswerLetter === currentQ.correct_answer) {
+            console.log("Poprawna!");
+            this.style.backgroundColor = "#2ecc71"; 
+            buttons.forEach(btn => btn.disabled = true);
+            if (next) next.style.display = "block";
+        } else {
+            this.style.backgroundColor = "#e74c3c"; 
+            lifes--;
+            console.log(`Życia pozostałe: ${lifes}`);
+            
+            if (lifes === 0) {
+                alert("Game Over!");
+                resetQuiz();
+            }
+        }
+    }
+
+    function changeQuestion() {
+        currentQuestion++;
+        
+        if (currentQuestion >= quizData.length) {
+            alert("Ukończyłeś cały quiz!");
+            resetQuiz();
+        } else {
+            clearStyles();
+            displayQuestion();
+        }
+    }
+    
+    function resetQuiz() {
+        currentQuestion = 0;
+        lifes = 3;
+        clearStyles();
+        displayQuestion();
+    }
+
+    function clearStyles() {
+        buttons.forEach(btn => {
+            btn.textContent = btn.textContent.split(".")[0] + ". "; 
+            btn.style.backgroundColor = ''; 
+            btn.disabled = false; 
+        });
+        if (next) next.style.display = "none";
     }
 });
