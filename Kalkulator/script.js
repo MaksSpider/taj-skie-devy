@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 4:
                 if (Number(number) === 0){
                     alert("Nie dziel przez 0!!!");
+                    selectOperation = true;
                     return;
                 }
                 calculate = dzialanie / Number(number);
