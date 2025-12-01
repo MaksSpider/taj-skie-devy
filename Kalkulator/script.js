@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let dzialanie = 0;
     let operation = null;
     let calculate = null;
+    let selectOperation = false;
     let numberButtons = document.querySelectorAll('.num');
     let operatos = document.querySelectorAll('.operator');
     const display = document.getElementById('display');
@@ -18,30 +19,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getOperator(){
-        operation = this.textContent;
-        switch (operation){
-            case '+':
-                operation = 1;
-                break;
+        if(!selectOperation){
+            operation = this.textContent;
+            switch (operation){
+                case '+':
+                    operation = 1;
+                    break;
 
-            case '-':
-                operation = 2;
-                break;
+                case '-':
+                    operation = 2;
+                    break;
 
-            case '*':
-                operation = 3;
-                break;
+                case '*':
+                    operation = 3;
+                    break;
 
-            case '/':
-                operation = 4;
-                break;
-            default:
-                console.log("exception!!!");
-        }
-        dzialanie = Number(number);
-        number = '';
-
+                case '/':
+                    operation = 4;
+                    break;
+                default:
+                    console.log("exception!!!");
+            }
+            dzialanie = Number(number);
+            number = '';
+        
+        selectOperation = true;
         updateDisplay();
+    }
     }
 
     function equals(){
@@ -67,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         number = String(calculate);
         updateDisplay();
+        selectOperation = false;
     }
     function clearDisplay(){
         number = '';
